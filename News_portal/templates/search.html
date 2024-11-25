@@ -1,0 +1,31 @@
+{% extends "default.html" %}  
+
+{% block content %}  
+    <h2>Поиск новостей</h2>  
+    <form method="GET">  
+        {{ form.hidden_tag() }}  
+        <div>  
+            {{ form.title.label }}<br>  
+            {{ form.title(size=50) }}<br>  
+        </div>  
+        <div>  
+            {{ form.date.label }}<br>  
+            {{ form.date(size=10) }}<br>  
+        </div>  
+        <button type="submit">{{ form.submit.label }}</button>  
+    </form>  
+
+    {% if articles %}  
+        <h3>Результаты поиска:</h3>  
+        <ul>  
+            {% for article in articles %}  
+                <li>  
+                    <h3><a href="{{ url_for('news_detail', news_id=article.id) }}">{{ article.title }}</a></h3>  
+                    <p>Дата: {{ article.date.strftime('%d.%m.%Y') }}</p>  
+                </li>  
+            {% endfor %}  
+        </ul>  
+    {% else %}  
+        <p>Нет статей, соответствующих вашему запросу.</p>  
+    {% endif %}  
+{% endblock %}

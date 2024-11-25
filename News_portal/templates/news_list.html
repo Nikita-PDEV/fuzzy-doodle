@@ -1,0 +1,22 @@
+{% extends "default.html" %}  
+
+{% block content %}  
+    <h2>Новости</h2>  
+    <a href="{{ url_for('news_create') }}">Создать новую новость</a>  
+    <ul>  
+        {% for article in news %}  
+            <li>  
+                <h3><a href="{{ url_for('news_detail', news_id=article.id) }}">{{ article.title }}</a></h3>  
+                <p>Дата: {{ article.date.strftime('%d.%m.%Y') }}</p>  
+                <p>{{ article.content[:150] }}...</p>  
+
+                <div>  
+                    <a href="{{ url_for('news_edit', news_id=article.id) }}">Редактировать</a>  
+                    <a href="{{ url_for('news_delete', news_id=article.id) }}">Удалить</a>  
+                </div>  
+            </li>  
+        {% else %}  
+            <li>Нет доступных новостей.</li>  
+        {% endfor %}  
+    </ul>  
+{% endblock %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>  
+<html lang="ru">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Новостной портал</title>  
+</head>  
+<body>  
+    <header>  
+        <h1>Добро пожаловать на новостной портал</h1>  
+    </header>  
+    <nav>  
+        <a href="{{ url_for('news_list') }}">Новости</a>  
+        <a href="{{ url_for('news_create') }}">Создать новость</a>  
+        <a href="{{ url_for('news_search') }}">Поиск новостей</a>  
+    </nav>  
+    <main>  
+        {% with messages = get_flashed_messages() %}  
+            {% if messages %}  
+                <ul class="flashes">  
+                {% for message in messages %}  
+                    <li>{{ message }}</li>  
+                {% endfor %}  
+                </ul>  
+            {% endif %}  
+        {% endwith %}  
+        {% block content %}{% endblock %}  
+    </main>  
+    <footer>  
+        <p>© 2024 Новости</p>  
+    </footer>  
+</body>  
+</html>
